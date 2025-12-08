@@ -1,0 +1,17 @@
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.csproj.AssemblyReference.cache
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.AssemblyInfoInputs.cache
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.AssemblyInfo.cs
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Infrastructure.deps.json
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Infrastructure.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Infrastructure.pdb
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Application.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Domain.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Application.pdb
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/bin/Debug/net9.0/GamePriceTracker.Domain.pdb
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePric.E53FCC43.Up2Date
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/refint/GamePriceTracker.Infrastructure.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/GamePriceTracker.Infrastructure.pdb
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Infrastructure/obj/Debug/net9.0/ref/GamePriceTracker.Infrastructure.dll

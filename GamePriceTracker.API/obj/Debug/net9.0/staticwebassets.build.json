@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "wfMqFa5nkWWk+2qycjM7a+b8kQcdAdOkqVab/gJWEhM=",
+  "Source": "GamePriceTracker.API",
+  "BasePath": "_content/GamePriceTracker.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
