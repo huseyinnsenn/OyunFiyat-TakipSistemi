@@ -13,3 +13,4 @@
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/refint/GamePriceTracker.Application.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.pdb
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/ref/GamePriceTracker.Application.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.sourcelink.json

@@ -9,3 +9,4 @@
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Domain/obj/Debug/net9.0/refint/GamePriceTracker.Domain.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Domain/obj/Debug/net9.0/GamePriceTracker.Domain.pdb
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Domain/obj/Debug/net9.0/ref/GamePriceTracker.Domain.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Domain/obj/Debug/net9.0/GamePriceTracker.Domain.sourcelink.json

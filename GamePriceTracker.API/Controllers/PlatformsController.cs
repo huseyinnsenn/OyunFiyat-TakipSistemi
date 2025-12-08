@@ -1,6 +1,7 @@
 using GamePriceTracker.Application.Features.Platforms.Commands;
 using GamePriceTracker.Application.Features.Platforms.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GamePriceTracker.API.Controllers
@@ -22,6 +23,7 @@ namespace GamePriceTracker.API.Controllers
             return Ok(await _mediator.Send(new GetPlatformsQuery()));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreatePlatformCommand command)
         {

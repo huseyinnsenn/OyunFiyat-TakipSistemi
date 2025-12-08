@@ -147,3 +147,4 @@
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/obj/Debug/net9.0/GamePriceTracker.API.sourcelink.json
