@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Table, Button, Form, Alert, Badge, Modal, Row, Col } from 'react-bootstrap'; 
-import { FaPlus, FaRedo, FaSignOutAlt, FaChartLine, FaEnvelope, FaLock, FaGamepad, FaCalendar, FaGlobe, FaDollarSign, FaBoxes, FaTag, FaRulerHorizontal } from 'react-icons/fa'; 
+import { FaPlus, FaRedo, FaChartLine, FaEnvelope, FaLock, FaGamepad, FaCalendar, FaGlobe, FaDollarSign, FaBoxes, FaTag, FaRulerHorizontal } from 'react-icons/fa'; 
+import CustomNavbar from './components/Navbar';
 
-// Backend Portunu buraya yazmayı unutma! (Örn: 5017)
+// Backend Portunu buraya yazmayı unutma!
 const API_URL = "http://localhost:5017/api"; 
 
-// --- ANA UYGULAMA BİLEŞENİ ---
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [email, setEmail] = useState("");
@@ -19,10 +19,10 @@ function App() {
   const [newGameReleaseDate, setNewGameReleaseDate] = useState("");
   const [formMessage, setFormMessage] = useState({ text: '', type: '' });
 
-  // Mock Metrikler (Sadece Görsel için)
-  const totalGames = 4;
-  const avgPrice = 1250;
-  const maxPrice = 1999;
+  // Mock Metrikler
+  const totalGames = prices.length > 0 ? [...new Set(prices.map(p => p.gameName))].length : 0;
+  const avgPrice = prices.length > 0 ? (prices.reduce((acc, curr) => acc + curr.price, 0) / prices.length).toFixed(2) : 0;
+  const maxPrice = prices.length > 0 ? Math.max(...prices.map(p => p.price)) : 0;
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,6 @@ function App() {
     }
   }, [token]);
 
-  // --- Login, Fetch, Logout, AddGame Fonksiyonları (DEĞİŞMEDİ) ---
   const login = async (e) => {
     e.preventDefault();
     try {
@@ -88,11 +87,7 @@ function App() {
       });
 
       if (!response.ok) {
-        if (response.status === 403) {
-             setFormMessage({ text: 'Yetkiniz yok. Admin rolü gereklidir.', type: 'danger' });
-        } else {
-             setFormMessage({ text: 'Oyun eklenirken bir hata oluştu.', type: 'danger' });
-        }
+        setFormMessage({ text: 'Hata oluştu veya yetkiniz yok.', type: 'danger' });
         return;
       }
       
@@ -103,57 +98,53 @@ function App() {
         setNewGamePublisher('');
         setNewGameReleaseDate('');
         setFormMessage({ text: '', type: '' });
+        fetchPrices();
       }, 1500);
     } catch (err) {
-      setFormMessage({ text: 'Bağlantı hatası oluştu.', type: 'danger' });
+      setFormMessage({ text: 'Bağlantı hatası.', type: 'danger' });
     }
   };
-  // -------------------------------------------------------------------
 
-  // --- EKRAN 1: GİRİŞ EKRANI (Login) ---
+  // --- EKRAN 1: GİRİŞ EKRANI ---
   if (!token) {
     return (
-      <Container fluid className="d-flex justify-content-center align-items-center vh-100 bg-dark">
-        <Card className="p-5 shadow-lg border-light" style={{ width: '400px', borderRadius: '15px' }}>
-          <h2 className="text-center mb-4 fw-bold text-primary"><FaChartLine className="me-2" /> Giriş Yap</h2>
+      <div className="login-wrapper d-flex justify-content-center align-items-center vh-100 bg-dark">
+        <Card className="p-5 shadow-lg border-secondary bg-dark text-light" style={{ width: '400px', borderRadius: '15px' }}>
+          <h2 className="text-center mb-4 fw-bold text-info"><FaChartLine className="me-2" /> Giriş Yap</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={login}>
             <Form.Group className="mb-3">
-              <Form.Label className="fw-bold text-light"><FaEnvelope className="me-1" /> Email</Form.Label>
-              <Form.Control type="email" size="lg" placeholder="ornek@mail.com"
+              <Form.Label className="fw-bold"><FaEnvelope className="me-1" /> Email</Form.Label>
+              <Form.Control type="email" size="lg" placeholder="ornek@mail.com" className="bg-secondary text-white border-0"
                             value={email} onChange={e => setEmail(e.target.value)} required />
             </Form.Group>
             <Form.Group className="mb-4">
-              <Form.Label className="fw-bold text-light"><FaLock className="me-1" /> Şifre</Form.Label>
-              <Form.Control type="password" size="lg" placeholder="******"
+              <Form.Label className="fw-bold"><FaLock className="me-1" /> Şifre</Form.Label>
+              <Form.Control type="password" size="lg" placeholder="******" className="bg-secondary text-white border-0"
                             value={password} onChange={e => setPassword(e.target.value)} required />
             </Form.Group>
-            <Button type="submit" variant="primary" size="lg" className="w-100 fw-bold">Giriş Yap</Button>
+            <Button type="submit" variant="info" size="lg" className="w-100 fw-bold">Giriş Yap</Button>
           </Form>
         </Card>
-      </Container>
+      </div>
     );
   }
 
-// ... (Kodun Başı Değişmedi) ...
-
-// --- EKRAN 2: ANA EKRAN (Dashboard) ---
+  // --- EKRAN 2: ANA EKRAN (DASHBOARD) ---
   return (
-    // 👈 1. Dış katman: Padding'i kaldırıyoruz (p-5 yok).
-    <div className="bg-dark p-5 min-vh-100">      
-      {/* 👈 2. İç katman: Centering'i zorluyoruz: mx-auto ile ortala, max-width ile genişliği sınırla. */}
-      <Container style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Üst Bar */}
-        <div className="d-flex justify-content-between align-items-center mb-5 p-3 bg-dark border border-secondary rounded">          <h2 className="m-0 fw-bold text-light"><FaChartLine className="me-2 text-info" /> Fiyat Takip Paneli</h2>
+    <div className="app-wrapper">
+      <CustomNavbar userEmail={email} onLogout={logout} />
+      
+      <main className="main-container">
+        {/* Üst Başlık ve Aksiyonlar */}
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2 className="m-0 fw-bold text-info"><FaChartLine className="me-2" /> Takip Paneli</h2>
           <div>
-            <Button onClick={() => setShowModal(true)} variant="info" className="me-2 fw-bold">
+            <Button onClick={() => setShowModal(true)} variant="info" className="me-2 fw-bold shadow-sm">
               <FaPlus className="me-1" /> Yeni Oyun Ekle
             </Button>
-            <Button onClick={fetchPrices} variant="outline-light" className="me-2 fw-bold">
+            <Button onClick={fetchPrices} variant="outline-light" className="fw-bold shadow-sm">
               <FaRedo className="me-1" /> Yenile
-            </Button>
-            <Button onClick={logout} variant="danger" className="fw-bold">
-              <FaSignOutAlt className="me-1" /> Çıkış Yap
             </Button>
           </div>
         </div>
@@ -161,63 +152,55 @@ function App() {
         {/* Metrik Kartları */}
         <Row className="mb-5 g-4">
           <Col md={4}>
-            <Card bg="primary" text="white" className="shadow-lg h-100">
+            <Card className="game-card shadow-lg h-100 bg-primary text-white border-0">
               <Card.Body>
-                <h5 className="card-title"><FaBoxes className="me-2" /> Toplam Oyun</h5>
-                <Card.Text className="fs-1 fw-bold">{totalGames}</Card.Text>
-                <Badge bg="light" text="dark">Veritabanı Kaydı</Badge>
+                <h5 className="card-title opacity-75"><FaBoxes className="me-2" /> Toplam Oyun</h5>
+                <Card.Text className="display-5 fw-bold">{totalGames}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md={4}>
-            <Card bg="success" text="white" className="shadow-lg h-100">
+            <Card className="game-card shadow-lg h-100 bg-success text-white border-0">
               <Card.Body>
-                <h5 className="card-title"><FaRulerHorizontal className="me-2" /> Ortalama Fiyat</h5>
-                <Card.Text className="fs-1 fw-bold">{avgPrice} ₺</Card.Text>
-                <Badge bg="light" text="dark">Tüm Zamanlar</Badge>
+                <h5 className="card-title opacity-75"><FaRulerHorizontal className="me-2" /> Ortalama Fiyat</h5>
+                <Card.Text className="display-5 fw-bold">{avgPrice} ₺</Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md={4}>
-            <Card bg="warning" text="dark" className="shadow-lg h-100">
+            <Card className="game-card shadow-lg h-100 bg-warning text-dark border-0">
               <Card.Body>
-                <h5 className="card-title"><FaTag className="me-2" /> En Yüksek Fiyat</h5>
-                <Card.Text className="fs-1 fw-bold">{maxPrice} ₺</Card.Text>
-                <Badge bg="dark" text="light">Son 24 Saat</Badge>
+                <h5 className="card-title opacity-75"><FaTag className="me-2" /> En Yüksek</h5>
+                <Card.Text className="display-5 fw-bold">{maxPrice} ₺</Card.Text>
               </Card.Body>
             </Card>
           </Col>
         </Row>
 
-        {/* Tablo Kartı */}
-        <Card bg="dark" className="shadow-lg border-secondary" style={{borderRadius: '15px', overflow: 'hidden'}}>
-          <Card.Header className="bg-secondary text-white p-3">
-            <h5 className="m-0">📝 Canlı Fiyat Akışı</h5>
+        {/* Canlı Akış Tablosu */}
+        <Card className="game-card shadow-lg border-0 overflow-hidden bg-dark">
+          <Card.Header className="bg-secondary bg-opacity-25 text-white p-3 border-0">
+            <h5 className="m-0 fw-bold text-info">📝 Canlı Fiyat Akışı</h5>
           </Card.Header>
-          
           <Card.Body className="p-0">
-            <div className="table-responsive" style={{maxHeight: '600px'}}>
-              <Table striped bordered hover variant="dark" responsive className="mb-0 align-middle">
-                <thead className="table-secondary sticky-top">
+            <div className="table-responsive" style={{maxHeight: '500px'}}>
+              <Table hover variant="dark" className="mb-0 align-middle">
+                <thead className="table-dark">
                   <tr>
-                    <th className="p-3 text-center"><FaGamepad /> Oyun Adı</th>
-                    <th className="p-3 text-center"><FaGlobe /> Platform</th>
-                    <th className="p-3 text-center"><FaDollarSign /> Fiyat</th>
-                    <th className="p-3 text-center"><FaCalendar /> Tarih</th>
+                    <th className="p-3">Oyun Adı</th>
+                    <th className="p-3 text-center">Platform</th>
+                    <th className="p-3 text-center">Fiyat</th>
+                    <th className="p-3 text-center">Tarih</th>
                   </tr>
                 </thead>
                 <tbody>
                   {prices.map(entry => (
-                    <tr key={entry.id}>
-                      <td className="fw-bold text-center text-info">{entry.gameName}</td>
+                    <tr key={entry.id} className="border-secondary border-opacity-10">
+                      <td className="p-3 fw-bold text-info">{entry.gameName}</td>
                       <td className="text-center">
-                        <Badge bg="primary" className="px-3 py-2">
-                          {entry.platformName}
-                        </Badge>
+                        <Badge bg="primary" className="rounded-pill px-3 py-2">{entry.platformName}</Badge>
                       </td>
-                      <td className="text-center fw-bold text-warning fs-5">
-                        {entry.price} ₺
-                      </td>
+                      <td className="text-center fw-bold text-warning fs-5">{entry.price} ₺</td>
                       <td className="text-center text-muted small">
                         {new Date(entry.recordingDate).toLocaleString('tr-TR')}
                       </td>
@@ -225,59 +208,46 @@ function App() {
                   ))}
                 </tbody>
               </Table>
-              
               {prices.length === 0 && (
-                <div className="text-center p-5 text-muted">
-                  <h4>📭 Henüz veri yok</h4>
-                  <p>Veritabanında kayıtlı fiyat bulunamadı.</p>
-                </div>
+                <div className="text-center p-5 text-muted">Henüz veri yok...</div>
               )}
             </div>
           </Card.Body>
-          <Card.Footer className="text-muted text-end small p-2">
-            Görünen Kayıt: {prices.length}
-          </Card.Footer>
         </Card>
 
-        {/* MODAL (YENİ OYUN EKLE) */}
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered data-bs-theme="light">
-          <Modal.Header closeButton>
-            <Modal.Title><FaPlus className="me-1" /> Yeni Oyun Ekle</Modal.Title>
-          </Modal.Header>
-          <Form onSubmit={handleAddGame}>
-            <Modal.Body>
-              {formMessage.text && <Alert variant={formMessage.type}>{formMessage.text}</Alert>}
-              
-              <Form.Group className="mb-3">
-                <Form.Label><FaGamepad className="me-1" /> Oyun Başlığı</Form.Label>
-                <Form.Control type="text" required value={newGameTitle} onChange={(e) => setNewGameTitle(e.target.value)} />
-              </Form.Group>
-              
-              <Form.Group className="mb-3">
-                <Form.Label><FaDollarSign className="me-1" /> Yayıncı</Form.Label>
-                <Form.Control type="text" required value={newGamePublisher} onChange={(e) => setNewGamePublisher(e.target.value)} />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label><FaCalendar className="me-1" /> Çıkış Tarihi</Form.Label>
-                <Form.Control type="date" required value={newGameReleaseDate} onChange={(e) => setNewGameReleaseDate(e.target.value)} />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
-                Kapat
-              </Button>
-              <Button variant="success" type="submit">
-                Kaydet
-              </Button>
-            </Modal.Footer>
-          </Form>
+        {/* Modal: Yeni Oyun Ekle */}
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+          <div className="bg-dark text-light border border-secondary rounded shadow">
+            <Modal.Header closeButton closeVariant="white" className="border-secondary">
+              <Modal.Title><FaPlus className="me-2" /> Yeni Oyun Ekle</Modal.Title>
+            </Modal.Header>
+            <Form onSubmit={handleAddGame}>
+              <Modal.Body>
+                {formMessage.text && <Alert variant={formMessage.type}>{formMessage.text}</Alert>}
+                <Form.Group className="mb-3">
+                  <Form.Label>Oyun Başlığı</Form.Label>
+                  <Form.Control className="bg-secondary text-white border-0" type="text" required value={newGameTitle} onChange={(e) => setNewGameTitle(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Yayıncı</Form.Label>
+                  <Form.Control className="bg-secondary text-white border-0" type="text" required value={newGamePublisher} onChange={(e) => setNewGamePublisher(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Çıkış Tarihi</Form.Label>
+                  <Form.Control className="bg-secondary text-white border-0" type="date" required value={newGameReleaseDate} onChange={(e) => setNewGameReleaseDate(e.target.value)} />
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer className="border-secondary">
+                <Button variant="outline-light" onClick={() => setShowModal(false)}>İptal</Button>
+                <Button variant="info" type="submit" className="fw-bold">Kaydet</Button>
+              </Modal.Footer>
+            </Form>
+          </div>
         </Modal>
 
-      </Container>
-    
+      </main>
     </div>
   );
 }
 
-export default App
+export default App;

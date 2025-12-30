@@ -8,9 +8,9 @@
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.AssemblyInfoInputs.cache
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.AssemblyInfo.cs
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.csproj.CoreCompileInputs.cache
+/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.sourcelink.json
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePric.14B2EC92.Up2Date
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/refint/GamePriceTracker.Application.dll
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.pdb
 /Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/ref/GamePriceTracker.Application.dll
-/Users/huseyinsen/GamePriceTracker/GamePriceTracker.Application/obj/Debug/net9.0/GamePriceTracker.Application.sourcelink.json

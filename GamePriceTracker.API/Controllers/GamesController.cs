@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Authorization; // 👈 1. KİLİT MEKANİZMASI KÜTÜPHANESİ
+using Microsoft.AspNetCore.Authorization;
 using GamePriceTracker.Application.Features.Games.Commands;
+using GamePriceTracker.Application.Features.Games.Queries;
 using MediatR;
-using GamePriceTracker.Application.Features.Games.Queries; 
 using Microsoft.AspNetCore.Mvc;
 
 namespace GamePriceTracker.API.Controllers
@@ -17,25 +17,39 @@ namespace GamePriceTracker.API.Controllers
             _mediator = mediator;
         }
 
-        // GET: Herkese açık (Authorize YOK)
-        // İsteyen herkes oyun listesine bakabilir, üye olmasına gerek yok.
+        // 🎯 TEK VE DOĞRU GET METODU
+        // Hem tüm oyunları getirir, hem de platformId gelirse filtreler.
         [HttpGet]
-        public async Task<ActionResult<List<GameDto>>> GetAll()
+        public async Task<ActionResult<List<GameDto>>> GetAll([FromQuery] int? platformId)
         {
-            var query = new GetGamesQuery();
-            var result = await _mediator.Send(query);
-
+            var result = await _mediator.Send(new GetGamesQuery { PlatformId = platformId });
             return Ok(result);
         }
 
-        // POST: SADECE ÜYELERE ÖZEL 🔒
-        // Buraya sadece elinde geçerli bir Token (Kimlik Kartı) olan girebilir.
-        [Authorize] // 👈 2. KAPIYI KİLİTLEDİK!
+        // POST: api/Games
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreateGameCommand command)
         {
             var gameId = await _mediator.Send(command);
             return Ok(gameId);
+        }
+
+        // PUT: api/Games/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateGameCommand command)
+        {
+            if (id != command.Id) return BadRequest("ID uyuşmazlığı!");
+            
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        // DELETE: api/Games/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new DeleteGameCommand(id));
+            return NoContent();
         }
     }
 }

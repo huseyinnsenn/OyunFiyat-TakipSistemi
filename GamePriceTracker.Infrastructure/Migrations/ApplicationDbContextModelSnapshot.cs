@@ -22,13 +22,124 @@ namespace GamePriceTracker.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GamePriceTracker.Domain.Game", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ForumCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Oyunlar hakkında her şey.",
+                            Name = "Genel Sohbet"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "PC ve Konsol donanımları.",
+                            Name = "Donanım Tavsiyeleri"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Ne oynasam diyenler için.",
+                            Name = "Oyun Önerileri"
+                        });
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ForumCategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForumCategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ForumPosts");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumReply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ForumPostId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForumPostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ForumReplies");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PlatformId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
@@ -43,10 +154,12 @@ namespace GamePriceTracker.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PlatformId");
+
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.Platform", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Platform", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +176,7 @@ namespace GamePriceTracker.Infrastructure.Migrations
                     b.ToTable("Platforms");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.PriceEntry", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.PriceEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +205,40 @@ namespace GamePriceTracker.Infrastructure.Migrations
                     b.ToTable("PriceEntries");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.User", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,15 +271,64 @@ namespace GamePriceTracker.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.PriceEntry", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumPost", b =>
                 {
-                    b.HasOne("GamePriceTracker.Domain.Game", "Game")
+                    b.HasOne("GamePriceTracker.Domain.Entities.ForumCategory", "Category")
+                        .WithMany("Posts")
+                        .HasForeignKey("ForumCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamePriceTracker.Domain.Entities.User", "User")
+                        .WithMany("ForumPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumReply", b =>
+                {
+                    b.HasOne("GamePriceTracker.Domain.Entities.ForumPost", "ForumPost")
+                        .WithMany("Replies")
+                        .HasForeignKey("ForumPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamePriceTracker.Domain.Entities.User", "User")
+                        .WithMany("ForumReplies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ForumPost");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Game", b =>
+                {
+                    b.HasOne("GamePriceTracker.Domain.Entities.Platform", "Platform")
+                        .WithMany()
+                        .HasForeignKey("PlatformId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.PriceEntry", b =>
+                {
+                    b.HasOne("GamePriceTracker.Domain.Entities.Game", "Game")
                         .WithMany("PriceEntries")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamePriceTracker.Domain.Platform", "Platform")
+                    b.HasOne("GamePriceTracker.Domain.Entities.Platform", "Platform")
                         .WithMany("PriceEntries")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -144,14 +339,50 @@ namespace GamePriceTracker.Infrastructure.Migrations
                     b.Navigation("Platform");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.Game", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Review", b =>
+                {
+                    b.HasOne("GamePriceTracker.Domain.Entities.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamePriceTracker.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumCategory", b =>
+                {
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.ForumPost", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Game", b =>
                 {
                     b.Navigation("PriceEntries");
                 });
 
-            modelBuilder.Entity("GamePriceTracker.Domain.Platform", b =>
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.Platform", b =>
                 {
                     b.Navigation("PriceEntries");
+                });
+
+            modelBuilder.Entity("GamePriceTracker.Domain.Entities.User", b =>
+                {
+                    b.Navigation("ForumPosts");
+
+                    b.Navigation("ForumReplies");
                 });
 #pragma warning restore 612, 618
         }

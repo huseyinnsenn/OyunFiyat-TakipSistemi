@@ -1,0 +1,96 @@
+2025-12-27 18:08:13.767 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-27 18:08:14.036 +03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5017: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-12-27 18:09:26.624 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-27 18:09:26.923 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-27 18:09:26.932 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-27 18:09:26.933 +03:00 [INF] Hosting environment: Development
+2025-12-27 18:09:26.934 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-27 18:10:49.100 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-27 18:10:49.339 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 229.6048ms
+2025-12-27 18:10:49.359 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-27 18:10:49.369 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 10.3651ms
+2025-12-27 18:10:49.385 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-27 18:10:49.562 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 177.0837ms
+2025-12-27 18:13:43.200 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-27 18:13:43.466 +03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5017: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-12-27 18:14:04.676 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-27 18:14:04.920 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-27 18:14:04.929 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-27 18:14:04.930 +03:00 [INF] Hosting environment: Development
+2025-12-27 18:14:04.930 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-27 18:14:14.011 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-27 18:14:14.219 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 210.7103ms
+2025-12-27 18:14:14.245 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-27 18:14:14.256 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 10.4346ms
+2025-12-27 18:14:14.272 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-27 18:14:14.440 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 168.232ms
+2025-12-27 18:14:22.222 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/api/Forum/categories - null null
+2025-12-27 18:14:22.259 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-12-27 18:14:22.315 +03:00 [INF] Executing endpoint 'GamePriceTracker.API.Controllers.ForumController.GetCategories (GamePriceTracker.API)'
+2025-12-27 18:14:22.344 +03:00 [INF] Route matched with {action = "GetCategories", controller = "Forum"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCategories() on controller GamePriceTracker.API.Controllers.ForumController (GamePriceTracker.API).
+2025-12-27 18:14:22.509 +03:00 [INF] Executed action GamePriceTracker.API.Controllers.ForumController.GetCategories (GamePriceTracker.API) in 160.2687ms
+2025-12-27 18:14:22.510 +03:00 [INF] Executed endpoint 'GamePriceTracker.API.Controllers.ForumController.GetCategories (GamePriceTracker.API)'
+2025-12-27 18:14:22.510 +03:00 [ERR] Bir hata oluştu: Hafta 7: Loglama ve Hata Yönetimi Test Ediliyor!
+System.Exception: Hafta 7: Loglama ve Hata Yönetimi Test Ediliyor!
+   at GamePriceTracker.API.Controllers.ForumController.GetCategories() in /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/Controllers/ForumController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GamePriceTracker.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API/Middleware/ExceptionMiddleware.cs:line 21
+2025-12-27 18:14:22.591 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/api/Forum/categories - 500 null application/json 370.8782ms

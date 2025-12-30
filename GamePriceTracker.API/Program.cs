@@ -2,62 +2,62 @@ using GamePriceTracker.Application.Common.Interfaces;
 using GamePriceTracker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer; // YENİ
-using Microsoft.IdentityModel.Tokens; // YENİ
-using System.Text; // YENİ
-using Microsoft.OpenApi.Models; // YENİ (Swagger için)
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS AYARI (Frontend'in erişmesi için)
+// 1. Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
+
+// 2. CORS (Hayati Önlem: AllowAll politikasını daha garantici hale getirdik)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
-// 1. Controller ve Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// SWAGGER AYARLARI (Kilit Butonu İçin)
+// SWAGGER AYARLARI
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+        Description = "JWT Authorization header using the Bearer scheme.",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
     });
-
     c.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
         {
             new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
+                Scheme = "oauth2", Name = "Bearer", In = ParameterLocation.Header,
             },
             new List<string>()
         }
     });
 });
 
-// 2. JWT DOĞRULAMA AYARLARI (GÜVENLİK)
-var secretKey = builder.Configuration["JwtSettings:Secret"];
-var key = Encoding.ASCII.GetBytes(secretKey!);
+// 3. JWT AYARLARI
+var secretKey = builder.Configuration["JwtSettings:Secret"] ?? "BuCokGizliBirKeyOlmalidir1234567890";
+var key = Encoding.ASCII.GetBytes(secretKey);
 
 builder.Services.AddAuthentication(x =>
 {
@@ -77,7 +77,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-// 3. Veritabanı ve MediatR
+// 4. Veritabanı
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
@@ -87,21 +87,24 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GameP
 
 var app = builder.Build();
 
-// Pipeline (Sıralama Önemli!)
+// PIPELINE SIRALAMASI
+
+// Geliştirme aşamasında Swagger her zaman en üstte
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseMiddleware<GamePriceTracker.API.Middleware.ExceptionMiddleware>();
 
+// 1. CORS Her zaman Authentication'dan ÖNCE gelmeli
 app.UseCors("AllowAll");
 
-// Önce KİMLİK DOĞRULAMA (Sen kimsin?)
-app.UseAuthentication(); 
+app.UseHttpsRedirection();
 
-// Sonra YETKİLENDİRME (Girebilir misin?)
+// 2. Auth ve Authorization
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

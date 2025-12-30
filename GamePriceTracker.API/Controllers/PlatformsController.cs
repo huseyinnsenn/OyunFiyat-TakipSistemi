@@ -29,5 +29,24 @@ namespace GamePriceTracker.API.Controllers
         {
             return Ok(await _mediator.Send(command));
         }
+
+        // PUT: api/Platforms/5
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdatePlatformCommand command)
+        {
+            if (id != command.Id) return BadRequest("ID uyuşmazlığı!");
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        // DELETE: api/Platforms/5
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new DeletePlatformCommand(id));
+            return NoContent();
+        }
     }
 }

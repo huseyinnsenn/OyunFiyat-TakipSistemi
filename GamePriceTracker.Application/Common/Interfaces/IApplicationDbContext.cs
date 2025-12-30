@@ -1,20 +1,18 @@
-using GamePriceTracker.Domain;
 using Microsoft.EntityFrameworkCore;
+using GamePriceTracker.Domain.Entities;
 
-namespace GamePriceTracker.Application.Common.Interfaces
+namespace GamePriceTracker.Application.Common.Interfaces;
+
+public interface IApplicationDbContext
 {
-    // Bu arayüz, Application katmanının veritabanından beklentilerini tanımlar.
-    public interface IApplicationDbContext
-    {
-        DbSet<Game> Games { get; }
-        DbSet<Platform> Platforms { get; }
-        DbSet<PriceEntry> PriceEntries { get; }
+    DbSet<Game> Games { get; }
+    DbSet<Platform> Platforms { get; }
+    DbSet<PriceEntry> PriceEntries { get; }
+    DbSet<User> Users { get; }
+    DbSet<Review> Reviews { get; } // Eksikti, eklendi
+    DbSet<ForumCategory> ForumCategories { get; }
+    DbSet<ForumPost> ForumPosts { get; }
+    DbSet<ForumReply> ForumReplies { get; }
 
-        DbSet<User> Users { get; }
-
-        // Değişiklikleri kaydetme metodu
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-    }
-
-    
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

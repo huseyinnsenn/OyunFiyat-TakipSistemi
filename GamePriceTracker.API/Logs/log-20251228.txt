@@ -1,0 +1,111 @@
+2025-12-28 20:36:22.390 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-12-28 20:36:22.848 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-12-28 20:36:22.864 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-12-28 20:36:22.875 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-12-28 20:36:22.877 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-12-28 20:36:22.889 +03:00 [INF] Applying migration '20251228173537_Hafta8FinalSetup'.
+2025-12-28 20:36:22.905 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251228173537_Hafta8FinalSetup', '9.0.1');
+2025-12-28 20:37:31.895 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-28 20:37:32.188 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-28 20:37:32.196 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 20:37:32.197 +03:00 [INF] Hosting environment: Development
+2025-12-28 20:37:32.198 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-28 20:37:38.931 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-28 20:37:39.154 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 225.6239ms
+2025-12-28 20:37:39.195 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-28 20:37:39.206 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 11.3417ms
+2025-12-28 20:37:39.220 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-28 20:37:39.392 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 171.6376ms
+2025-12-28 20:39:40.508 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5017/api/Auth/login - application/json 62
+2025-12-28 20:39:40.555 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-12-28 20:39:40.563 +03:00 [INF] CORS policy execution successful.
+2025-12-28 20:39:40.611 +03:00 [INF] Executing endpoint 'GamePriceTracker.API.Controllers.AuthController.Login (GamePriceTracker.API)'
+2025-12-28 20:39:40.649 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.String]] Login(GamePriceTracker.Application.Features.Auth.Commands.LoginUserCommand) on controller GamePriceTracker.API.Controllers.AuthController (GamePriceTracker.API).
+2025-12-28 20:39:42.323 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[@__request_Email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."FirstName", u."LastName", u."PasswordHash", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__request_Email_0
+LIMIT 1
+2025-12-28 20:39:43.004 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-12-28 20:39:43.011 +03:00 [INF] Executed action GamePriceTracker.API.Controllers.AuthController.Login (GamePriceTracker.API) in 2357.8106ms
+2025-12-28 20:39:43.012 +03:00 [INF] Executed endpoint 'GamePriceTracker.API.Controllers.AuthController.Login (GamePriceTracker.API)'
+2025-12-28 20:39:43.022 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5017/api/Auth/login - 200 null text/plain; charset=utf-8 2518.3029ms
+2025-12-28 21:01:30.532 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-28 21:01:30.553 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 22.2803ms
+2025-12-28 21:01:30.579 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-28 21:01:30.586 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 6.5138ms
+2025-12-28 21:01:30.622 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-28 21:01:30.662 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 39.7329ms
+2025-12-28 21:16:05.989 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-28 21:16:06.253 +03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5017: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-12-28 21:16:36.131 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-28 21:16:36.387 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-28 21:16:36.396 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 21:16:36.397 +03:00 [INF] Hosting environment: Development
+2025-12-28 21:16:36.397 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-28 21:17:31.346 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-28 21:17:31.558 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 214.5489ms
+2025-12-28 21:17:31.590 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-28 21:17:31.607 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 15.6205ms
+2025-12-28 21:17:31.619 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-28 21:17:31.799 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 179.1428ms
+2025-12-28 21:26:08.972 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-28 21:26:09.259 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-28 21:26:09.268 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 21:26:09.271 +03:00 [INF] Hosting environment: Development
+2025-12-28 21:26:09.271 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-28 21:26:12.603 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-28 21:26:12.810 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 208.0185ms
+2025-12-28 21:26:12.842 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-28 21:26:12.853 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 11.0729ms
+2025-12-28 21:26:12.870 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-28 21:26:13.044 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 174.2186ms
+2025-12-28 22:06:26.060 +03:00 [INF] User profile is available. Using '/Users/huseyinsen/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-12-28 22:06:26.323 +03:00 [INF] Now listening on: http://localhost:5017
+2025-12-28 22:06:26.333 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 22:06:26.334 +03:00 [INF] Hosting environment: Development
+2025-12-28 22:06:26.334 +03:00 [INF] Content root path: /Users/huseyinsen/GamePriceTracker/GamePriceTracker.API
+2025-12-28 22:06:38.227 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.html - null null
+2025-12-28 22:06:38.441 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.html - 200 null text/html;charset=utf-8 215.278ms
+2025-12-28 22:06:38.472 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/index.js - null null
+2025-12-28 22:06:38.484 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/index.js - 200 null application/javascript;charset=utf-8 12.1273ms
+2025-12-28 22:06:38.497 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - null null
+2025-12-28 22:06:38.670 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5017/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 172.8899ms

@@ -1,5 +1,5 @@
 using GamePriceTracker.Application.Common.Interfaces;
-using GamePriceTracker.Domain;
+using GamePriceTracker.Domain.Entities;
 using MediatR;
 
 namespace GamePriceTracker.Application.Features.Platforms.Commands

@@ -1,6 +1,6 @@
 using BCrypt.Net; // Şifreleme için
 using GamePriceTracker.Application.Common.Interfaces;
-using GamePriceTracker.Domain;
+using GamePriceTracker.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
