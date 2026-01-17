@@ -87,6 +87,21 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GameP
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>(); 
+        context.Database.Migrate(); //
+        Console.WriteLine("--> Veritabanı başarıyla güncellendi.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"--> Veritabanı güncellenirken hata: {ex.Message}");
+    }
+}
+
 // PIPELINE SIRALAMASI
 
 // Geliştirme aşamasında Swagger her zaman en üstte

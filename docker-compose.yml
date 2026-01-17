@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: game-db
+    environment:
+      POSTGRES_USER: user123
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: GameTrackerDb
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: GamePriceTracker.API/Dockerfile
+    container_name: game-api
+    ports:
+      - "5017:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=GameTrackerDb;Username=user123;Password=password123
+
+  ui:
+    build:
+      context: ./game-price-tracker-ui
+    container_name: game-ui
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api

@@ -21,8 +21,8 @@ public class ForumPost
     public int UserId { get; set; }
     public User? User { get; set; }
 
-    // 🎯 DÜZELTİLEN YER: Görseldeki (image_97e3ec.jpg) ismin aynısını yazdık
 
+    [Column("forum_category_id")]
     public int ForumCategoryId { get; set; }
     public ForumCategory? Category { get; set; }
 
